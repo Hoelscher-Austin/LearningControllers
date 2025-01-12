@@ -2,8 +2,9 @@
 
 namespace LearningControllers.Models.Entities {
     public class Student {
+
         [Key]
-        public int Id { get; set; }
+        public int StudentId { get; set; }
         [Required]
         public string? Name { get; set; }
         [Required]
