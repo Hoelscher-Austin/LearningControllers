@@ -72,6 +72,16 @@ namespace LearningControllers.Controllers {
 
             return Ok(student);
         }
+
+        //Delete an entry in the Students table
+        [Route("{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteStudent(int id) {
+
+           await _dbContext.Students.Where(student => student.StudentId == id).ExecuteDeleteAsync();
+
+           return NoContent();
+        }
         
     }
 }
