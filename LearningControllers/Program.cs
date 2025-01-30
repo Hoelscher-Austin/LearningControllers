@@ -4,6 +4,17 @@ using LearningControllers.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Add CORS Policy
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAngularApp",
+        policy => {
+            policy.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        });
+});
+
 //Add Controller Services; automatically configures a Scoped lifetime
 builder.Services.AddControllers();
 
@@ -27,6 +38,9 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+//Use CORS
+app.UseCors("AllowAngularApp");
+
 //Set up routing for incoming HTTP request
 app.UseRouting();
 
